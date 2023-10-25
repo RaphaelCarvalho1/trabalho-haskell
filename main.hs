@@ -1,3 +1,3 @@
 main :: IO()
 
-main = do print "tem git"
+main = do print "tem git" teste teste teste teste
