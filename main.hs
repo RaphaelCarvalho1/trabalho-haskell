@@ -2,9 +2,26 @@
 stringToInt :: String -> Integer
 stringToInt s = read s
 
+-- conta casos
+
+conta [] (z, m ,v) = print((z, m, v))
+
+conta (vizinho : resto) (z,m,v) = do
+    if vizinho == "Z" then (conta resto (z+1, m, v))
+    else if vizinho == "M" then (conta resto (z, m+1, v))
+    else (conta resto (z, m, v+1))
+
 -- função para cada critério
 
+criterio no (z, m, v) = if no == "M" && v == 3 then "V"
+                        else if no == "V" && z >= 1 then "Z"
+                        else if no == "V" && v < 2 then "M"
+                        else if no == "V" && v > 3 then "M"
+                        else if no == "Z" && v == 0 then "M"
+                        else "V" 
 
+
+-- aplicaCriterio no vizinhos = criterio (no (count vizinhos))
 
 -- função que cria vetor de n nil
 
@@ -31,7 +48,7 @@ removeX (y: resto) x = if x == y then (removeX resto x) else (y: (removeX resto 
 
 vizinhos [l1, l2, l3] = removeX ((sublista l1 3) ++ (removeSegundo (sublista l2 3)) ++ (sublista l3 3)) "nil"
 
-main :: IO()
+-- iterações
 
 iteracao2 [] _ = print ""
 
@@ -45,6 +62,8 @@ iteracao [l1, l2] l3 = do
 iteracao (l1: (l2: restoListas)) l3 = do
     iteracao2 l1 [("nil": l3), ("nil": l1), ("nil": l2)]
     iteracao (l2: restoListas) l1
+
+main :: IO()
 
 main = do
     n <- getLine
