@@ -101,9 +101,9 @@ printaResultado :: ([[String]], Integer) -> Integer -> IO()
 printaResultado (matriz, i) n = do
     print matriz
     if i == 0 then do
-        putStrLn "O sistema não estabilizou"
+        putStrLn ("Após " ++ show (n-i) ++ " iterações, o sistema ainda não estabilizou.")
     else do
-        putStrLn ("Estabilizou após "++ (show (n-i)) ++ " iterações")
+        putStrLn ("Estabilizou após "++ (show (n-i)) ++ " iterações.")
 
 leMatrizEExecuta :: Integer -> Integer -> Integer -> [[String]] -> IO()
 
