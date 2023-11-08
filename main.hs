@@ -8,7 +8,7 @@ stringToInt s = read s
 
 conta [] (z, m ,v) = (z, m, v)
 
-conta (vizinho : resto) (z,m,v) = do
+conta (vizinho : resto) (z,m,v) =
     if vizinho == "Z" then (conta resto (z+1, m, v))
     else if vizinho == "M" then (conta resto (z, m+1, v))
     else (conta resto (z, m, v+1))
@@ -31,7 +31,7 @@ criterio no (z, m, v) = if no == "M" && v == 3 then "V"
 
 crianil l 0 = l
 
-crianil l n = do
+crianil l n =
     crianil ("nil" : l) (n-1)
 
 -- pegar vizinhos em uma lista
@@ -74,8 +74,8 @@ mudaMatriz (l1: (l2: restoListas)) l3 =
 
 itera matriz _ _ 0 = (matriz, 0)
 
-itera matriz matrizanterior dim n = 
-    if matrizanterior == matriz 
+itera matriz matrizAnterior dim n = 
+    if matrizAnterior == matriz 
         then (matriz, n)
         else (itera (mudaMatriz (matriz ++ [(crianil [] dim)]) (crianil [] dim)) matriz  dim (n-1))
 
@@ -113,7 +113,6 @@ leMatrizEExecuta dim n i matriz = do
     else do
         linha <- (lerLinha i)
         leMatrizEExecuta dim n (i+1) (matriz++[linha])
-    
 
 main :: IO()
 
