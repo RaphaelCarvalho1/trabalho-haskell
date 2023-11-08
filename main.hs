@@ -72,12 +72,12 @@ mudaMatriz (l1: (l2: restoListas)) l3 =
 
 -- Iteração base do programa
 
-itera matriz _ 0 = (matriz, 0)
+itera matriz _ _ 0 = (matriz, 0)
 
-itera matriz dim n = do
-    let res = mudaMatriz (matriz ++ [(crianil [] dim)]) (crianil [] dim)
-    if res == matriz then (res, n)
-    else (itera res dim (n-1))
+itera matriz matrizanterior dim n = 
+    if matrizanterior == matriz 
+        then (matriz, n)
+        else (itera (mudaMatriz (matriz ++ [(crianil [] dim)]) (crianil [] dim)) matriz  dim (n-1))
 
 -- Interface
 
@@ -109,7 +109,7 @@ leMatrizEExecuta :: Integer -> Integer -> Integer -> [[String]] -> IO()
 
 leMatrizEExecuta dim n i matriz = do
     if dim == i then do
-        printaResultado (itera matriz dim n) n
+        printaResultado (itera matriz [] dim n) n
     else do
         linha <- (lerLinha i)
         leMatrizEExecuta dim n (i+1) (matriz++[linha])
