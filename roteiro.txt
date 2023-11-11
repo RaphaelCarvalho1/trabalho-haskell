@@ -1,0 +1,7 @@
+Na raiz do projeto, execute
+
+ghc main.hs para compilar
+
+após isso, execute
+
+./main

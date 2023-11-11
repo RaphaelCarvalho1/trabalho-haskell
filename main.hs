@@ -4,6 +4,10 @@
 stringToInt :: String -> Integer
 stringToInt s = read s
 
+tamanho [] = 0
+
+tamanho (x: resto) = tamanho resto + 1
+
 -- conta casos
 
 conta [] (z, m ,v) = (z, m, v)
@@ -105,22 +109,26 @@ printaResultado (matriz, i) n = do
     else do
         putStrLn ("Estabilizou após "++ (show (n-i)) ++ " iterações.")
 
-leMatrizEExecuta :: Integer -> Integer -> Integer -> [[String]] -> IO()
+leMatrizEExecuta :: Integer -> Integer -> Integer -> [[String]] -> Integer -> IO()
 
-leMatrizEExecuta dim n i matriz = do
+leMatrizEExecuta dim n i matriz tamAnt = do
     if dim == i then do
-        printaResultado (itera matriz [] dim n) n
+        printaResultado (itera matriz [] tamAnt n) n
     else do
         linha <- (lerLinha i)
-        leMatrizEExecuta dim n (i+1) (matriz++[linha])
+        let tam = tamanho linha
+        if tamAnt /= -1 && tamAnt /= tam 
+            then do print "Tamanho das linhas precisa ser igual"
+        else do
+            leMatrizEExecuta dim n (i+1) (matriz++[linha]) tam 
 
 main :: IO()
 
 main = do 
-    putStrLn "Digite a dimensão da matriz: "
+    putStrLn "Digite a quantidade de linhas da matriz: "
     m <- getLine
     let dim = stringToInt m
     putStrLn "Digite a quantidade máxima de iterações: "
     nString <- getLine
     let n = stringToInt nString
-    leMatrizEExecuta dim n 0 []
+    leMatrizEExecuta dim n 0 [] (-1)
