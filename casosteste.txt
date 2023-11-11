@@ -1,0 +1,34 @@
+caso 1:
+
+V M Z V
+M Z Z V
+M Z M M 
+M Z Z Z
+
+caso 2:
+
+V V
+Z M
+Z Z
+M M 
+V Z
+
+caso 3:
+
+V V Z M M V
+
+caso 4:
+
+M V V
+Z M 
+Z Z Z M
+
+caso 5:
+
+V V
+V V
+
+caso 6:
+
+V V Z M M V
+V Z M M V Z
